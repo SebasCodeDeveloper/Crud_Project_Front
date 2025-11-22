@@ -1,1 +1,22 @@
-<p>users works!</p>
+<h2>Lista de usuarios</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Acciones</th>
+  </tr>
+
+  <tr *ngFor="let u of users">
+    <td>{{ u.id }}</td>
+    <td>{{ u.name }}</td>
+    <td>{{ u.email }}</td>
+    <td>
+      <button [routerLink]="['/user-form', u.id]">Editar</button>
+      <button (click)="deleteUser(u.id!)">Eliminar</button>
+    </td>
+  </tr>
+</table>
+
+<button routerLink="/user-form">Crear nuevo</button>

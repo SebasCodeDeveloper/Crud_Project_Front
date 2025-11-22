@@ -1,1 +1,17 @@
-<p>user-form works!</p>
+<h2>{{ id ? 'Editar usuario' : 'Crear usuario' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <label>Nombre:</label>
+  <input formControlName="name">
+
+  <label>Email:</label>
+  <input formControlName="email">
+
+  <label>Contraseña:</label>
+  <input formControlName="password" type="password">
+
+
+  <button type="submit">Guardar</button>
+  <button routerLink="/users">Cancelar</button>
+</form>
