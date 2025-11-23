@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { environment } from '../environments/environment';
 import { catchError } from 'rxjs/operators';
+import { Users } from '../pages/users/users';
 
 export interface User {
-    id?: number;
+    id?: any;
     name: string;
     email: string;
     // agregar más campos según sea necesario
@@ -14,33 +16,34 @@ export interface User {
     providedIn: 'root'
 })
 export class UserService {
-    private baseUrl = 'http://localhost:3000/users'; // ajustar según el backend
+     private apiUrl = `${environment.apiUrl}/users`;
     private httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     constructor(private http: HttpClient) {}
 
-    getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.baseUrl).pipe(catchError(this.handleError));
-    }
+ 
+      getUsers(): Observable<any> {
+        return this.http.get<User>(`${environment.apiUrl}`)
+  }
 
-    getUser(id: number): Observable<User> {
-        return this.http.get<User>(`${this.baseUrl}/${id}`).pipe(catchError(this.handleError));
-    }
+    getUser(id: any): Observable<any> {
+        return this.http.get<User>(`${environment.apiUrl}/${id}`)
+  }
 
-    createUser(user: User): Observable<User> {
-        return this.http.post<User>(this.baseUrl, user, this.httpOptions).pipe(catchError(this.handleError));
-    }
+    createUser(body: User): Observable<any> {
+        return this.http.post<User>(`${environment.apiUrl}`, body)
+  }
 
-    updateUser(id: number, user: Partial<User>): Observable<User> {
-        return this.http.put<User>(`${this.baseUrl}/${id}`, user, this.httpOptions).pipe(catchError(this.handleError));
+    updateUser(id: any, body: User): Observable<any> {
+        return this.http.put<User>(`${environment.apiUrl}/${id}`, body);
     }
-
-    deleteUser(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/${id}`, this.httpOptions).pipe(catchError(this.handleError));
-    }
-
+    
+    deleteUser(id: any): Observable<any> {
+        return this.http.delete<User>(`${environment.apiUrl}/${id}`)
+  }
+  
     private handleError(error: HttpErrorResponse) {
         let msg = 'Error desconocido';
         if (error.error instanceof ErrorEvent) {

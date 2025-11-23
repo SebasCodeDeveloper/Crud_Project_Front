@@ -2,5 +2,5 @@
 export const environment = {
     production: false,
     // Ajusta a la URL de tu backend (host y puerto)
-    apiBaseUrl: 'http://localhost:8081/api/users'
+    apiUrl: 'http://localhost:8081/api/users'
 };
