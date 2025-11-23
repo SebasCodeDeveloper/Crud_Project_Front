@@ -16,7 +16,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 export class UserForm implements OnInit{
 
   form! : FormGroup;
-  id ! : number | null;
+  id ! : any;
 
   constructor(
     private fb: FormBuilder,
@@ -26,8 +26,7 @@ export class UserForm implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.id = this.route.snapshot.paramMap.get('id');
     this.form = this.fb.group({
       name: [''],
       email: [''],
@@ -45,7 +44,7 @@ export class UserForm implements OnInit{
     if (this.id) {
       this.userService.updateUser(this.id, this.form.value).subscribe(() => {
         this.router.navigate(['/users']);
-      });
+      });    
     } else {
       console.log(this.form.value,"en el save del user form");
       this.userService.createUser(this.form.value).subscribe( { next: () => {

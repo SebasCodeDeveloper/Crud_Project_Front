@@ -28,22 +28,22 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}`)
   }
 
-    getUser(id: number): Observable<User> {
-        return this.http.get<User>(`${this.apiUrl}/${id}`).pipe(catchError(this.handleError));
-    }
+    getUser(id: any): Observable<any> {
+        return this.http.get<User>(`${environment.apiUrl}/${id}`)
+  }
 
     createUser(body: User): Observable<any> {
         return this.http.post<User>(`${environment.apiUrl}`, body)
   }
 
-    updateUser(id: number, user: Partial<User>): Observable<User> {
-        return this.http.put<User>(`${this.apiUrl}/${id}`, user, this.httpOptions).pipe(catchError(this.handleError));
+    updateUser(id: any, body: User): Observable<any> {
+        return this.http.put<User>(`${environment.apiUrl}/${id}`, body);
     }
     
     deleteUser(id: any): Observable<any> {
         return this.http.delete<User>(`${environment.apiUrl}/${id}`)
   }
-
+  
     private handleError(error: HttpErrorResponse) {
         let msg = 'Error desconocido';
         if (error.error instanceof ErrorEvent) {
