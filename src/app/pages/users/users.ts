@@ -5,6 +5,7 @@ import { RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+
 @Component({
   selector: 'app-users',
   imports: [RouterLink, CommonModule], 
