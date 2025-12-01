@@ -8,7 +8,7 @@
 
       <div class="mb-3">
         <label class="form-control-plaintext">Nombre:</label>
-        <input class="form-control w-50 m-auto" formControlName="name" type="text" placeholder="Nombre"> 
+        <input class="form-control w-50 m-auto" formControlName="name" type="text" placeholder="Nombre">
       </div>
 
       <div class="mb-3">
@@ -18,7 +18,7 @@
 
       <div class="mb-3">
         <label class="form-control-plaintext">Contraseña:</label>
-        <input class="form-control w-50 m-auto"  formControlName="password" type="password" placeholder="Contraseña">
+        <input class="form-control w-50 m-auto" formControlName="password" type="password" placeholder="Contraseña">
       </div>
 
     </div>
@@ -27,6 +27,45 @@
       <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill me-2">Guardar</button>
       <button type="button" class="btn btn-danger px-5 py-2 rounded-pill" routerLink="/users">Cancelar</button>
     </div>
- 
+
   </form>
+
+  @if (modalSaved) {
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <div class="icon-container">
+        <span class="icon-check">&#10003;</span>
+      </div>
+
+      <h2 class="modal-title">¡Guardado!</h2>
+
+      <p class="modal-message">
+        El usuario <strong style="color: rgb(223, 0, 0);">{{ userNameModal }}</strong>
+        fue registrado exitosamente.
+      </p>
+
+      <button class="modal-button" routerLink="/users">Continuar</button>
+    </div>
+  </div>
+
+  } @else if (createModal) {
+
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <div class="icon-container">
+        <span class="icon-check">&#10003;</span>
+      </div>
+
+      <h2 class="modal-title">¡Creado!</h2>
+
+      <p class="modal-message">
+        El usuario <strong style="color: rgb(223, 0, 0);">{{ userNameModal }}</strong>
+        fue creado exitosamente.
+      </p>
+
+      <button class="modal-button" routerLink="/users">Continuar</button>
+    </div>
+  </div>
+
+  }
 </div>

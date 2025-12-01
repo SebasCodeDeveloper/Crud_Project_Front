@@ -40,3 +40,20 @@
   </div>
 
 </div>
+
+<div *ngIf="ModalDeleted" class="modal-overlay" id="successModal">
+  <div class="modal-content">
+    <div class="icon-container">
+      <span class="icon-check">&#10003;</span>
+    </div>
+
+    <h2 class="modal-title">¡Eliminado!</h2>
+
+    <p class="modal-message">
+      El usuario <strong style="color: rgb(223, 0, 0);">{{ userNameModal }}</strong>
+      fue eliminado exitosamente.
+    </p>
+<button class="modal-button" (click)="closeModal()">Continuar</button>
+
+  </div>
+</div>

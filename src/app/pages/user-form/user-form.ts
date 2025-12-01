@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 @Component({
@@ -12,11 +12,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   templateUrl: './user-form.html',
   styleUrl: './user-form.scss',
   standalone: true,
-  providers: [provideAnimations()]
+  providers: [provideAnimations()],
 })
 export class UserForm implements OnInit {
   form!: FormGroup;
   id!: any;
+  modalSaved = false;
+  createModal = false;
+  userNameModal: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -40,15 +43,19 @@ export class UserForm implements OnInit {
     }
   }
 
+
   save() {
+    const nombreUsuario = this.form.value.name;
     if (this.id) {
       this.userService.updateUser(this.id, this.form.value).subscribe(() => {
-        this.router.navigate(['/users']);
+        this.userNameModal = nombreUsuario; 
+        this.modalSaved = true;
       });
     } else {
       this.userService.createUser(this.form.value).subscribe({
         next: () => {
-          this.router.navigate(['/users']);
+          this.userNameModal = nombreUsuario; 
+          this.createModal = true;
         },
         error: (err) => {
           console.error('Error creating user:', err);
