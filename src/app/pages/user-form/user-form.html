@@ -1,32 +1,60 @@
 <div class="container mt-5">
 
-  <h2 class="text-center">{{ id ? 'EDITA USUARIO' : 'CREAR USUARIO' }}</h2>
+  <!-- Título dinámico -->
+  <h2 class="text-center">{{ id ? 'EDITAR USUARIO' : 'CREAR USUARIO' }}</h2>
 
+  <!-- Formulario reactivo -->
   <form [formGroup]="form" (ngSubmit)="save()">
 
-    <div class="text-center mb-4 container mt-5">
+    <div class="container mt-5 text-center">
 
+      <!-- Campo Nombre -->
       <div class="mb-3">
-        <label class="form-control-plaintext">Nombre:</label>
-        <input class="form-control w-50 m-auto" formControlName="name" type="text" placeholder="Nombre"> 
+        <label>Nombre:</label>
+        <input class="form-control  w-50 m-auto" formControlName="name" type="text" placeholder="Nombre">
       </div>
 
+      <!-- Campo Email -->
       <div class="mb-3">
-        <label class="form-control-plaintext">Email:</label>
+        <label>Email:</label>
         <input class="form-control w-50 m-auto" formControlName="email" type="email" placeholder="Email">
       </div>
 
+      <!-- Campo Contraseña -->
       <div class="mb-3">
-        <label class="form-control-plaintext">Contraseña:</label>
-        <input class="form-control w-50 m-auto"  formControlName="password" type="password" placeholder="Contraseña">
+        <label>Contraseña:</label>
+        <input class="form-control w-50 m-auto" formControlName="password" type="password" placeholder="Contraseña">
       </div>
 
     </div>
 
-    <div class="text-center mt-5">
-      <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill me-2">Guardar</button>
+    <!-- Botones -->
+    <div class="text-center d-flex justify-content-center gap-4 mt-5">
+      <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill ">Guardar</button>
       <button type="button" class="btn btn-danger px-5 py-2 rounded-pill" routerLink="/users">Cancelar</button>
     </div>
 
   </form>
+
+  <!-- ÚNICO MODAL REUTILIZABLE -->
+  @if (modalSaved) {
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <div class="icon-container">
+        <span class="icon-check">&#10003;</span>
+      </div>
+
+      <!-- Título dinámico según acción -->
+      <h2 class="modal-title">¡{{ id ? 'Actualizado' : 'Creado' }}!</h2>
+
+      <p class="modal-message">
+        El usuario <strong style="color:red">{{ userNameModal }}</strong>
+        fue {{ id ? 'actualizado' : 'creado' }} exitosamente.
+      </p>
+
+      <button class="modal-button" routerLink="/users">Continuar</button>
+    </div>
+  </div>
+  }
+
 </div>
